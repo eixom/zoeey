@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : newXMLDocument.xml
+    Created on : 2008年8月17日, 上午2:22
+    Author     : MoXie
+    Description:
+        Purpose of the document follows.
+-->
+<root>
+    <inventory>
+        <book year="2000">
+            <title>Snow Crash</title>
+            <author>Neal Stephenson</author>
+            <publisher>Spectra</publisher>
+            <isbn>0553380958</isbn>
+            <price>14.95</price>
+        </book>
+         <book year="2000">
+            <title>Snow Crash sec</title>
+            <author>Neal Stephenson</author>
+            <publisher>Spectra</publisher>
+            <isbn>0553380958</isbn>
+            <price>14.95</price>
+        </book>
+    </inventory>
+</root>

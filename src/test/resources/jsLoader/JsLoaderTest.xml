@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : JsLoaderTest.xml
+    Created on : 2009年3月25日, 下午7:21
+    Author     : MoXie
+    Description:
+        Purpose of the document follows.
+-->
+<zo:root  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns:zo='http://xml.zoeey.org/schema/JsContainer'
+   xsi:schemaLocation='http://xml.zoeey.org/schema/JsContainer'>
+    <zo:base>
+        <zo:fileRoot>{classesDir}/jsLoader/script</zo:fileRoot>
+        <zo:forceFile>
+            <zo:file>/force.js</zo:file>
+        </zo:forceFile>
+        <zo:safeRoot fileRoot="/webRoot">
+            <zo:file>/another_safe_jses</zo:file>
+            <zo:file>/another_safe_jses2</zo:file>
+        </zo:safeRoot>
+        <zo:forceFile fileRoot="{classesDir}/jsLoader/script/common">
+            <zo:file name="force_2">/force_2.js</zo:file>
+            <zo:file>/force_3.js</zo:file>
+        </zo:forceFile>
+    </zo:base>
+
+    <zo:single>
+        <zo:file name="single_1">/single_1.js</zo:file>
+        <zo:file name="single_2">/article/single_2.js</zo:file>
+    </zo:single>
+
+    
+    <zo:single fileRoot="{classesDir}/jsLoader/script/article">
+        <zo:file name="article.list">/list.js</zo:file>
+        <zo:file name="article.edit">/edit.js</zo:file>
+    </zo:single>
+
+
+
+    <zo:groups>
+        <zo:group name="article.ajax">
+            <zo:file name="group_file_a">/json.list.js</zo:file>
+            <zo:file>/json.update.js</zo:file>
+        </zo:group>
+    </zo:groups>
+</zo:root>

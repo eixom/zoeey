@@ -1,0 +1,120 @@
+<!--
+ MoXie (SysTem128@GMail.Com) 2009-3-9 12:15:31
+-->
+写Js，Css时划分文件会有功能、适用范围、权限限制等条件约束。
+这样在带来维护方便的同时也产生了不少问题：
+
+1、使用时单页面调用过多文件，造成对服务器请求频繁。造成页面加载延迟。
+
+2、控制不同版本非自写文件时对向上兼容的约束。非自写文件包括使用别人的框架、插件
+、不明确代码作用范围的文件、牵扯重要页面不便随意修改的文件等等。如单纯使用目录
+去控制会提升调用的复杂度。
+
+3、Js，Css文件目录过深且处于不同位置，调用非常繁杂。比如我们的工程要求给用户分
+配一个放置Js、的目录，且给用户提供了一个公用的基础代码库。为了避免不同用户间的
+目录冲突，分配给用户的Js目录都特别深。
+……
+于是我们需要着手处理这些问题。
+下面是解决思路：
+
+1、需要将文件打包起来再发给用户。
+
+2、需要给文件一个昵称或者说代号和一个版本标识，方便控制。这个版本号最好有默认值，且便于记忆。
+
+3、需要默认加载一些东西，将合并的内容缓存起来避免重复合并文件带来的效率问题。
+
+4、要方便调用，和普通的Js调用一样。不需要很生僻难理解的调用代码。
+
+5、在必要情况下定义Js和Css用于引入文件的注释型标签。（取消 详情见下）
+
+调用范例（草稿）：
+语法要求简单严格，易于遵从和使用。
+
+<script type="text/javascript" src="/import?js=jquery.1.6.1,manage/article,{mySite}/defaultStyle/pagea" charset="utf-8"></script>
+
+这样调用了三个文件，分别是：公共库内的jquery文件、article专有的文件、给pagea自定义的文件。
+charset，用来规定当前需要合并文件的读取与写入编码。
+Css调用方式大体相同。
+
+注释型标签 (取消 理由：减少了移植性和简易度)
+Js
+/*{import article.common.js}*/
+/*{import article.edit.js}*/
+Css
+/*{import article.common.css}*/
+/*{import article.edit.css}*/
+
+合并技术难题：
+1、Css合并后其原有文件中的url资源路径改变。
+2、Js合并需要考虑压缩。
+3、单纯的文本文件拼接不会带来冲突，但需要在Js的加载顺序上加以注意。
+4、合并文件编码要求。
+5、文件读取与写入需要高并发。
+
+MoXie (SysTem128~~GMail.Com)
+09-03-09 03:20
+
+
+
+<xml>
+    <!--
+      基本规则
+      1、base用于设定基本属性。
+         1）fileRoot 文件根目录（推荐使用绝对路径）。
+         2）single，group，file标签均可使用fileRoot属性来标注其子集所属根目录。
+         3）safeRoot 调用时如使用@开头则在safeRoot所规定的目录或文件
+         4）forceFile 强制加载文件，其处于加载队列最前方。
+      2、single 用于标识一个或多个单页别称(name属性)，可使用fileRoot属性。
+      3、group 将文件分组调用（别称为(name属性)），可使用fileRoot属性。
+      4、file 文件或目录名（作为目录名仅在safeRoot标签中出现），可使用fileRoot属性。
+      5、“@”用于标识绝对路径，如file标签中第一位出现@符号，则所有fileRoot被忽略。
+      6、所有目录以 / 结尾。
+      7、redirect 用于重定向。static默认为true，仅作location重定向。
+         static=false时使用Java发起请求，可跨域。
+         使用注意
+         ?import=cross_yh_weather&method=POST&param=%26name%3DMoXie%26all%3Dtrue
+         import 为引入名称
+         method 为请求方式默认为GET，可用值 GET,POST
+         param 参数需要URLencode 如 &name=MoXie&all=true 到 %26name%3DMoXie%26all%3Dtrue
+    -->
+    <base>
+    <!-- 文件根目录，作用于无fileRoot配置且无绝对路径标识（@）的文件 -->
+    <fileRoot>/webRoot/scripts/</fileRoot>
+    <safeRoot>
+        <!-- file可为目录 -->
+        <file>/webRoot/special/script/edit.js</file>
+        <file>/webRoot/scripts/</file>
+        <file>/webRootStatic/script/</file>
+    </safeRoot>
+    <!--  强制加载文件 -->
+    <forceFile>
+        <file>common/jquery.js</file>
+        <file>common/main.lib.js</file>
+        <file fileRoot="/webRootStatic/script/">common/some.lib.js</file>
+    </forceFile>
+    </base>
+    <redirect>
+        <file name="cross_yh_weather" static="false">http://someapi.com/weather.jsp</file>
+        <file name="my_weather">/weather.jsp</file>
+    </redirect>
+    <single>
+        <file name="articleCom">article/common.js</file>
+        <file name="articleEdit" fileRoot="/webRoot/js/">article/edit.js</file>
+        <file name="specialPage_nationalDay">@/webRoot/special/script/edit.js</file>
+    </single>
+
+    <single fileRoot="/webRoot/Script/edition2.0/">
+        <file name="articleCom_2_0">article/common.js</file>
+        <file name="articleEdit_2_0">article/edit.js</file>
+    </single>
+
+    <group name="article.edit">
+        <file>article/common.js</file>
+        <file>article/edit.js</file>
+    </group>
+
+    <group name="customer.default.article.edit" fileRoot="{myDir}default/article/">
+        <file>common.js</file>
+        <file>edit.js</file>
+    </group>
+</xml>

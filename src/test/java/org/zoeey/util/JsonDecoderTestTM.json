@@ -1,0 +1,47 @@
+/* 
+ *  MoXie (SysTem128@GMail.Com) 2009-4-27 16:51:51
+ *  $Id: JsonDecoderTestTM.json 66 2009-08-20 07:30:24Z MoXie $
+ */
+[
+    // string 8:602,660
+    // int 1:559,570
+    // boolean true 566,585
+    // item 851,585,917
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+    // 这行是用来测试注释效率的
+         {"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+        ,{"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+]

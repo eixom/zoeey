@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : RouterConfig.xml
+    Created on : 2009年8月6日, 上午11:13
+    Author     : MoXie
+    Description:
+        Purpose of the document follows.
+-->
+
+<zo:root  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+          xmlns:zo='http://xml.zoeey.org/schema/DispatchConfig'
+          xsi:schemaLocation='http://xml.zoeey.org/schema/DispatchConfig DispatchConfig.xsd'>
+    <zo:init>
+        <zo:ignoreCase>true</zo:ignoreCase>
+    </zo:init>
+    <zo:entrys>
+        <zo:annots>
+            <zo:annot>org.zoeey.dispatch.ArticlePublish</zo:annot>
+            <zo:annot>org.zoeey.dispatch.ArticlePublish</zo:annot>
+        </zo:annots>
+        <!--
+            publish
+        -->
+        <zo:entry>
+            <zo:pattern>/loaderExample</zo:pattern>
+            <zo:pattern>/loader</zo:pattern>
+            <zo:publish>org.zoeey.dispatch.ArticlePublish</zo:publish>
+        </zo:entry>
+        <zo:entry>
+            <zo:pattern>/validator</zo:pattern>
+            <zo:publish>org.zoeey.dispatch.ArticlePublish</zo:publish>
+        </zo:entry>
+        <zo:entry>
+            <zo:pattern>/fireJava</zo:pattern>
+            <zo:publish>org.zoeey.dispatch.ArticlePublish</zo:publish>
+        </zo:entry>
+        <!--
+            init
+        -->
+        <zo:entry>
+            <zo:publish>org.zoeey.dispatch.TimePublish</zo:publish>
+        </zo:entry>
+
+        <zo:entry>
+            <zo:publish>org.zoeey.dispatch.TimePublish</zo:publish>
+        </zo:entry>
+    </zo:entrys>
+</zo:root>

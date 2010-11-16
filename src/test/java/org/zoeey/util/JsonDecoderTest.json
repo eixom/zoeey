@@ -1,0 +1,48 @@
+/*
+ *  MoXie (SysTem128@GMail.Com) 2009-4-27 16:51:51
+ *  $Id: JsonDecoderTest.json 66 2009-08-20 07:30:24Z MoXie $
+ */
+
+[
+    // 无空白符
+    {"id":1,"item":{"key":"value_1"},"title":"title_1","isShow":true,"isNew":false,"rate":1.2345}
+    // 空格
+    ,{ "id" : 2 , "item" : { "key" : "value_2" } , "title" : "title_2" , "isShow" : true , "isNew" : false , "rate" :2.2345 }
+    // tab
+    ,{	"id"	:	3	,	"item"	:	{	"key"	:	"value_3"	}	,	"title"	:	"title_3"	,	"isShow"	:	true	,	"isNew"	:	false	,	"rate"	:3.2345	}
+    // \n \r
+    /*
+     * 多行注释 1
+     **/
+    ,{ //
+        "id" /*
+     * 多行注释 2
+     **/
+        : //
+        5 //
+        , //
+        "item" //
+        : //
+        { //
+            "key" //
+            : //
+            "value_5" //
+        } //
+        ,
+        "title" //
+        : //
+        "title_5" //
+        , //
+        "isShow" //
+        : //
+        true //
+        , //
+        "isNew" //
+        : //
+        false //
+        , //
+        "rate" //
+        : //
+        5.2345 //
+    } //
+]

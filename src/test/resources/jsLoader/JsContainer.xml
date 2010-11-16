@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : JsContainer.xml
+    Created on : 2009年3月13日, 下午11:08
+    Author     : MoXie
+    Description:
+        Js容器配置说明与范例
+-->
+<!--
+      基本规则
+      1、base用于设定基本属性。
+         1）fileRoot 文件根目录（推荐使用绝对路径）。
+         2）single，group，file标签均可使用fileRoot属性来标注其子集所属根目录。
+         3）safeRoot 调用时如使用@开头则在safeRoot所规定的目录或文件，该路径必须使用安全目录做起始
+         4）forceFile 强制加载文件，其处于加载队列最前方。
+      2、single 用于标识一个或多个单页别称(name属性)，可使用fileRoot属性。
+      3、group 将文件分组调用（别称为(name属性)），可使用fileRoot属性。
+      4、file 文件或目录名（作为目录名仅在safeRoot标签中出现），可使用fileRoot属性。
+         1） name 只可由字母数字和下划线组成。
+         2）“@”用于标识绝对路径，如file标签中第一位出现@符号，则所有fileRoot被忽略。
+         3）isDebug 是否仅在调试模式时调用。 非 true 都将被解析为 false。
+         4）isStatic 是否为静态文件，默认为 true 。在使用 redirect重定向时可以设置为 false。  非 true 都将被解析为 false。
+         Ps. 文件名将和fileRoot直接拼合，请注意第6条规则。
+      6、redirect 用于重定向。isStatic默认为true，仅作location重定向。
+         isStatic=false时使用Java发起请求，可跨域。
+         使用注意
+         ?import=cross_yh_weather&method=POST&param=%26name%3DMoXie%26all%3Dtrue
+         import 为引入名称
+         method 为请求方式默认为GET，可用值 GET,POST
+         param 参数需要URLencode 如 &name=MoXie&all=true 到 %26name%3DMoXie%26all%3Dtrue
+      7、关于变量{$varname}变量名只可由字母数字和下划线组成，在使用时实时替换，未定义时使用空字符串。
+      8、所有目录以 / 结尾，安全起见不允许使用相对路径，非根目录使用/起始。
+    -->
+<zo:root  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns:zo='http://xml.zoeey.org/schema/JsContainer'
+   xsi:schemaLocation='http://xml.zoeey.org/schema/JsContainer JsContainer.xsd'>
+    <zo:base>
+         <!-- 文件根目录，作用于无fileRoot配置且无绝对路径标识（@）的文件 -->
+        <zo:fileRoot>{classesDir}/org/zoeey/core/util/combiner/js/jsLoaderTest</zo:fileRoot>
+        <!--
+            用于扫描 填写路径的文件
+        -->
+        <zo:safeRoot>
+            <!-- file可为目录 -->
+            <zo:file fileRoot="d:/somedir/">/webRoot/special/script/edit.js</zo:file>
+            <zo:file>@/webRoot/scripts/</zo:file>
+            <zo:file>/webRootStatic/script/</zo:file>
+        </zo:safeRoot>
+        <zo:safeRoot fileRoot="e:/staticRoot/">
+            <!-- file可为目录 -->
+            <zo:file fileRoot="e:/someotherdir/">/webRoot/special/script/edit.js</zo:file>
+            <zo:file>@/webRoot/scripts_sec/</zo:file>
+            <zo:file>/webRootStatic/script/</zo:file>
+        </zo:safeRoot>
+        <!--  强制加载文件 -->
+        <zo:forceFile>
+            <zo:file isDebug="true">/common/debuger.js</zo:file>
+            <zo:file>/common/jquery.js</zo:file>
+            <zo:file>/common/main.lib.js</zo:file> 
+        </zo:forceFile>
+        <zo:forceFile fileRoot="{classesDir}/org/zoeey/core/util/combiner/js/jsLoaderTest/">
+            <zo:file>/common/jquery.1.2.3.4.5.6.js</zo:file>
+            <zo:file>/common/main.1.2.3.4.5.6.lib.js</zo:file>
+            <zo:file>/common/some.1.2.3.4.5.6.lib.js</zo:file>
+        </zo:forceFile>
+    </zo:base>
+     <!--
+    Version 1.0 前暂废除
+    isStatic 在这里可以关闭  
+    <zo:redirect>
+         http 等前注意加@
+        <zo:file name="cross_yh_weather" isStatic="false">@http://someapi.com/weather.jsp</zo:file>
+        <zo:file name="my_weather">/weather.jsp</zo:file>
+    </zo:redirect>
+    -->
+    <zo:single>
+        <zo:file name="articleCom">/article/common.js</zo:file>
+        <zo:file name="articleEdit" fileRoot="{classesDir}/org/zoeey/core/util/combiner/js/jsLoaderTest/webRoot/js/">/article/edit.js</zo:file>
+        <zo:file name="specialPage_nationalDay">@/webRoot/special/script/edit.js</zo:file>
+    </zo:single>
+
+    <zo:single fileRoot="{classesDir}/org/zoeey/core/util/combiner/js/jsLoaderTest/webRoot/Script/edition2.0/">
+        <zo:file name="articleCom_2_0">/article/common.js</zo:file>
+        <zo:file name="articleEdit_2_0">/article/edit.js</zo:file>
+    </zo:single>
+    
+    <zo:groups>
+        <zo:group name="article.edit">
+            <zo:file>/article/common.js</zo:file>
+            <zo:file>/article/edit.js</zo:file>
+        </zo:group>
+        <zo:group name="customer.default.article.edit" fileRoot="{myDir}default/article/">
+            <zo:file>/common.js</zo:file>
+            <zo:file fileRoot="ImSpecial/">/edit.js</zo:file>
+        </zo:group>
+    </zo:groups>
+    <zo:groups >
+        <zo:group name="manage.article.edit">/
+            <zo:file>@article/common.js</zo:file>
+            <zo:file name="articleEidtorJs">/article/edit.js</zo:file>
+        </zo:group>
+    </zo:groups>
+</zo:root>

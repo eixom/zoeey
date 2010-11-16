@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+      基本规则
+      1、base用于设定基本属性。
+         1）fileRoot 文件根目录（推荐使用绝对路径）。
+         2）single，group，file标签均可使用fileRoot属性来标注其子集所属根目录。
+         3）safeRoot 调用时如使用@开头则在safeRoot所规定的目录或文件，该路径必须使用安全目录做起始
+         4）forceFile 强制加载文件，其处于加载队列最前方。
+      2、single 用于标识一个或多个单页别称(name属性)，可使用fileRoot属性。
+      3、group 将文件分组调用（别称为(name属性)），可使用fileRoot属性。
+      4、file 文件或目录名（作为目录名仅在safeRoot标签中出现），可使用fileRoot属性。
+         1） name 只可由字母数字和下划线组成。
+         2）“@”用于标识绝对路径，如file标签中第一位出现@符号，则所有fileRoot被忽略。
+         3）isDebug 是否仅在调试模式时调用。 非 true 都将被解析为 false。
+         4）isStatic 是否为静态文件，默认为 true 。在使用 redirect重定向时可以设置为 false。  非 true 都将被解析为 false。
+         Ps. 文件名将和fileRoot直接拼合，请注意第6条规则。
+      6、redirect 用于重定向。isStatic默认为true，仅作location重定向。
+         isStatic=false时使用Java发起请求，可跨域。
+         使用注意
+         ?import=cross_yh_weather&method=POST&param=%26name%3DMoXie%26all%3Dtrue
+         import 为引入名称
+         method 为请求方式默认为GET，可用值 GET,POST
+         param 参数需要URLencode 如 &name=MoXie&all=true 到 %26name%3DMoXie%26all%3Dtrue
+      7、关于变量{$varname}变量名只可由字母数字和下划线组成，在使用时实时替换，未定义时使用空字符串。
+      8、所有目录以 / 结尾，安全起见不允许使用相对路径，非根目录使用/起始。
+    -->
+    
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.zoeey.org/schema/JsContainer"
+    xmlns:tns="http://xml.zoeey.org/schema/JsContainer"
+    elementFormDefault="qualified">
+    <xsd:element name="root">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="base">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="fileRoot"/>
+                            <xsd:element name="safeRoot" minOccurs="0" maxOccurs="unbounded" type="tns:fileList"></xsd:element>
+                            <xsd:element name="forceFile" minOccurs="0" maxOccurs="unbounded" type="tns:fileList"></xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <!--
+                Version 1.0 前暂废除
+                <xsd:element name="redirect" minOccurs="0" maxOccurs="unbounded" type="tns:namedFileList"></xsd:element>
+                -->
+                <xsd:element name="single" minOccurs="0" maxOccurs="unbounded" type="tns:namedFileList"></xsd:element>
+                <xsd:element name="groups" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="group" maxOccurs="unbounded" type="tns:fileGroup"></xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <!-- 一般文件 -->
+    <xsd:complexType name="file" mixed="true">
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="fileRoot" type="xsd:string"/>
+        <xsd:attribute name="isStatic" type="xsd:boolean" default="true" use="optional"/>
+        <xsd:attribute name="isDebug" type="xsd:boolean" default="false"/>
+        <xsd:attribute name="charset" type="xsd:string"/>
+    </xsd:complexType>
+    <!-- 必须进行命名的文件 -->
+    <xsd:complexType name="namedFile" mixed="true">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="fileRoot" type="xsd:string"/>
+        <xsd:attribute name="isStatic" type="xsd:boolean" default="true" use="optional"/>
+        <xsd:attribute name="isDebug" type="xsd:boolean" default="false"/>
+        <xsd:attribute name="charset" type="xsd:string"/>
+    </xsd:complexType>
+    <!-- 一般文件列表 -->
+    <xsd:complexType name="fileList">
+        <xsd:sequence>
+            <xsd:element name="file" type="tns:file" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="fileRoot" type="xsd:string"/>
+        <xsd:attribute name="isDebug" type="xsd:boolean" default="false"/>
+        <xsd:attribute name="charset" type="xsd:string"/>
+    </xsd:complexType>
+    <!-- 需要有命名的文件列表 -->
+    <xsd:complexType name="namedFileList" >
+        <xsd:sequence>
+            <xsd:element name="file" type="tns:namedFile" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="fileRoot" type="xsd:string"/>
+        <xsd:attribute name="isDebug" type="xsd:boolean" default="false"/>
+        <xsd:attribute name="charset" type="xsd:string"/>
+    </xsd:complexType>
+    <!-- 文件组 -->
+    <xsd:complexType name="fileGroup" >
+        <xsd:sequence>
+            <xsd:element name="file" type="tns:file" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="fileRoot" type="xsd:string"/>
+        <xsd:attribute name="isDebug" type="xsd:boolean" default="false"/>
+        <xsd:attribute name="charset" type="xsd:string"/>
+    </xsd:complexType>
+
+</xsd:schema>

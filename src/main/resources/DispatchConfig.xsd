@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.zoeey.org/schema/DispatchConfig"
+    xmlns:tns="http://xml.zoeey.org/schema/DispatchConfig"
+    elementFormDefault="qualified">
+    <xsd:element name="root">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="init">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ignoreCase" type="xsd:boolean" fixed="true"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="entrys">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="entry" type="tns:entry" minOccurs="0" maxOccurs="unbounded"/>
+                            <xsd:element name="annots" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="annot" type="tns:annot" maxOccurs="unbounded"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="entry">
+        <xsd:sequence>
+            <xsd:element name="pattern" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="publish" type="javaee:fully-qualified-classType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="annot"></xsd:complexType>
+</xsd:schema>
+
+
+
+
+
+
+
+
+
+

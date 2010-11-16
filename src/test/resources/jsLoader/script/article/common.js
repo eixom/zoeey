@@ -1,0 +1,1 @@
+/* article/common.js */

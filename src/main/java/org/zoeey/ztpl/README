@@ -1,0 +1,18 @@
+
+Plugins 前缀解释
+
+ZTPC = Zoeey Template Plugin Compile 编译函数
+
+ZTPM = Zoeey Template Plugin Modifier 修饰器
+
+ZTPF = Zoeey Template Plugin Function 函数
+
+==================================================================
+todolist
+1、Comments 
+        {* Ztpl *}
+
+2、Functions 
+        {include file="header.tpl"}
+        {assign var="name" value="Bob"}
+

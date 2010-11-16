@@ -1,0 +1,142 @@
+Java： Java源文
+TL：   模板源文
+Text： 输出内容
+
+注释
+	TL:
+		Hello!{* MoXie *}!
+	Text:
+		Hello!!
+	Ps:
+		单行注释与多行注释相同
+普通变量
+	Java:
+	        tpl.assgin("str","name");
+		tpl.assgin("int",2);
+		tpl.assgin("bool",true);
+	TL:
+		{$str},{$int},{$bool}
+	Text:
+		 name,2,true
+--------------------------------------------------------------------------------
+对象访问
+	Java:
+		Person person = new Person();
+		person.setName("MoXie");
+		tpl.assgin("person",person);
+	TL:
+		{$person.getName()},
+		{$person.getName().length()}
+	Text:
+		MoXie, 5
+--------------------------------------------------------------------------------
+块访问
+	Java:
+            @TplClass()
+            public class myBlock{
+                @TplReg(type=BLOCK,name="getName")
+                public static void block(String content,BlurMap params,ZoeeyTpl smarty){
+                        content += params.get("name").getString();
+                }
+            }
+        Config[removed]:
+                <classMap>org.**.myBlock</classMap>
+                <tagName regAs="block">getName</tagName>
+	TL:
+                {assign var="name" value="MoXie"}
+		{getName name=$name name=$name+"."}
+                    {$name}
+                    Name:
+                {/getName}
+        Text:
+                MoXie
+                Name:MoXie.
+循环块可以使用块函数和eval函数实现。
+--------------------------------------------------------------------------------
+函数访问
+	Java:
+            @TplClass()
+            public class MyFunc{
+                 @TplReg(type=FUNCTION,name="getBase64")
+                public static String func(BlurMap params,ZoeeyTpl tpl){
+                    return Base64.encode(params.get("str").getBytes("utf-8"))
+                }
+            }
+        Config[removed]:
+                <classMap>org.**.myFunc</classMap>
+                <tagName regAs="func">getName</tagName>
+	TL:
+		Base64:{getBase64 str="I'm a string:)"}
+        Text:
+                Base64:SSdtIGEgc3RyaW5nOik=
+--------------------------------------------------------------------------------
+修饰器
+    Java:
+           @TplClass()
+           public class myModifier{
+                @TplReg(type=MODIFIER,name="toBase64")
+                public static String modifier(Object value,BlurMap params,ZoeeyTpl tpl){
+                    return Base64.encode(String.valueOf(obj) + params.get("suffix").getString())
+                }
+            }
+        Config[removed]:
+                <classMap>org.**.myModifier</classMap>
+                <tagName regAs="modifier">toBase64</tagName>
+	TL:
+                {assign var="name" value="MoXie"}
+		Base64 A:{$name|toBase64}
+		Base64 B:{$name|toBase64 suffix=" haha!"|as="suffixed"} {$name_suff} // 使用as则不直接输出。
+        Text:
+                Base64 A:TW9YaWU=
+                Base64 B:TW9YaWUgaGFoYSE=
+--------------------------------------------------------------------------------
+默认变量处理
+    {assign var="title" value=$title|default "no title"}
+    {getName name="MoXie"|default:"no title" }
+    {$title}
+--------------------------------------------------------------------------------
+数学运算
+--------------------------------------------------------------------------------
+内建函数
+    ztpl.assgin 变量赋值
+    ztpl.cycle  轮转显示 例如表格的奇偶行换色
+    ztpl.properties_load    属性文件读取 并放入一个变量内
+    ztpl.now   现在时间long形式 System.currentTimeMillis();
+    ztpl.capture    宏录制
+    ztpl.trim       去除首尾空格和回车
+    ztpl.template   当前模板文件路径（实际使用时请注意由此暴露的信息有可能为系统带来危险）
+    ztpl.fetch 获取文件 {fetch file="/docs/navbar.js"} {fetch file="http://www.example.com/navbar.js"}
+
+    …………
+--------------------------------------------------------------------------------
+重要默认块函数
+    Js文件合并
+    {jsLoader.merge}
+    <script src="a.js" />
+    <script src="b.js" />
+    <script src="c.js" />
+    {/jsLoader.merge}
+    结果：<script src="getJs.zo?import=a.js;b.js;c.js" /> （编码设定已纳入配置文件）
+
+--------------------------------------------------------------------------------
+修饰函数
+    capitalize 首字母大写 {$name|capitalize}
+    count_characters:boolean    字符数统计 参数1：是否计算空白字符
+            {$name|count_characters false |as="nameLength"} 等同于 {$name.length() as="nameLength"}
+    date_format  {$ztpl.now|date_format style="%H:%M:%S"}
+    default  {$name|default "没名字"}
+    多个调用 {$name|capitalize |as="Name"|default "没名字"}
+    注意：修饰函数参数没有名称时取值使用 value 作为键名 。as使用时需要用|间隔，使用多个修饰函数时 as仅对其前函数有效。
+    使用as时结果不输出。
+--------------------------------------------------------------------------------
+语句
+    foreach 数组遍历  可处理 Collection，Map，Iterator，Enumeration
+    include_tpl 模板引入
+    include_txt 文本引入
+    insert      非缓存引入
+    if,elseif,else 逻辑块
+    ldelim,rdelim   左右定界符
+    literal     源意输出
+    java        Java源写入
+
+
