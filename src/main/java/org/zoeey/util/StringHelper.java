@@ -207,7 +207,7 @@ public final class StringHelper {
                 ch = chars[i];
                 if (!isTrimed) {
                     if (ArrayHelper.inArray(trimChars, ch)) {
-                        if (i >= limit) {
+                        if (limit > 0 && i >= limit) {
                             isTrimed = true;
                         }
                         continue;

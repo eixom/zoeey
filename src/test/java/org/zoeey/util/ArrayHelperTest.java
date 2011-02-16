@@ -7,8 +7,7 @@
  */
 package org.zoeey.util;
 
-import org.zoeey.util.ArrayHelper;
-import org.zoeey.util.JsonHelper;
+import java.util.Map.Entry;
 import java.util.Map;
 import junit.framework.TestCase;
 import org.junit.After;
@@ -129,19 +128,20 @@ public class ArrayHelperTest extends TestCase {
         String[] intsa = new String[]{"a", "b", "c", "d"};
         Integer[] intsb = new Integer[]{3, 5, 6, 8};
         Map<String, Integer> result = ArrayHelper.combine(intsa, intsb);
-        assertEquals(JsonHelper.encode(result), "{\"d\":8,\"a\":3,\"c\":6,\"b\":5}");
+
+        assertEquals(JsonHelper.encode(result), "{\"a\":3,\"b\":5,\"c\":6,\"d\":8}");
 
         intsb = new Integer[]{3, 5, 6, 8, 10, 20};
         result = ArrayHelper.combine(intsa, intsb);
-        assertEquals(JsonHelper.encode(result), "{\"d\":8,\"a\":3,\"c\":6,\"b\":5}");
+        assertEquals(JsonHelper.encode(result), "{\"a\":3,\"b\":5,\"c\":6,\"d\":8}");
 
         intsb = new Integer[]{3, 5};
         result = ArrayHelper.combine(intsa, intsb);
-        assertEquals(JsonHelper.encode(result), "{\"d\":null,\"a\":3,\"c\":null,\"b\":5}");
+        assertEquals(JsonHelper.encode(result), "{\"a\":3,\"b\":5,\"c\":null,\"d\":null}");
 
         intsb = null;
         result = ArrayHelper.combine(intsa, intsb);
-        assertEquals(JsonHelper.encode(result), "{\"d\":null,\"a\":null,\"c\":null,\"b\":null}");
+        assertEquals(JsonHelper.encode(result), "{\"a\":null,\"b\":null,\"c\":null,\"d\":null}");
     }
 
     /**

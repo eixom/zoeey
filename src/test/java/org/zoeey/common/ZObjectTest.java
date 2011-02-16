@@ -7,7 +7,6 @@
  */
 package org.zoeey.common;
 
-import org.zoeey.common.ZObject;
 import junit.framework.TestCase;
 import org.zoeey.util.TimeMeasurer;
 

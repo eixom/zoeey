@@ -481,12 +481,12 @@ public class DAOHelperTest {
             }
         }
         assertEquals("[\"uncached\",\"cached\",\"cached\"]", JsonHelper.encode(cacheResult_list));
-        //
-        assertEquals("[{\"ISACTIVE\":\"true\",\"NAME\":\"MoXie\"}]", JsonHelper.encode(daoHelper//
+        // 
+        assertEquals("[{\"NAME\":\"MoXie\",\"ISACTIVE\":\"true\"}]", JsonHelper.encode(daoHelper//
                 .query("select ? as isActive,? as name")//
                 .bind("true", "MoXie").getMapList()));
         //
-        assertEquals("[{\"ISACTIVE\":true,\"NAME\":\"MoXie\"}]", JsonHelper.encode(daoHelper//
+        assertEquals("[{\"NAME\":\"MoXie\",\"ISACTIVE\":true}]", JsonHelper.encode(daoHelper//
                 .query("select ? as isActive,? as name")//
                 .bind(true, "MoXie").getMapList()));
 

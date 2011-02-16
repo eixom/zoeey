@@ -108,7 +108,7 @@ public class QueryStringHelperTest extends TestCase {
     public void testToMap() {
         System.out.println("toMap");
         String urlStr = "first=value&arr[]=foo+bar&arr[]=baz#123";
-        String expResult = "{\"arr[]\":\"foo bar\",\"first\":\"value\"}";
+        String expResult = "{\"first\":\"value\",\"arr[]\":\"foo bar\"}";
         Map params = QueryStringHelper.toMap(urlStr);
         assertEquals(JsonEncoder.encode(params), expResult);
     }

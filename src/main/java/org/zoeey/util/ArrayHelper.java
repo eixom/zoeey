@@ -8,7 +8,7 @@
 package org.zoeey.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -164,7 +164,7 @@ public class ArrayHelper {
      * 
      * 创建一个Map，用一个数组的值作为其键名，另一个数组的值作为其值
      * 当键为空或无单元时返回空Map，否则以键数组为主导填充Map。值不足时填充null。
-     * 注意：Map中键顺序并不一定与参数keys顺序相同。
+     * 注意：Map中键顺序并与参数keys顺序相同。
      * @param <T>
      * @param <V>
      * @param keys
@@ -172,7 +172,7 @@ public class ArrayHelper {
      * @return
      */
     public static <T, V> Map<T, V> combine(T[] keys, V[] values) {
-        Map<T, V> map = new HashMap<T, V>();
+        Map<T, V> map = new LinkedHashMap<T, V>();
         if (keys != null && keys.length > 0) {
             int vsize = values == null ? 0 : values.length;
             for (int i = 0; i < keys.length; i++) {

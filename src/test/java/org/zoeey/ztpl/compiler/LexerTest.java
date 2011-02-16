@@ -281,7 +281,7 @@ public class LexerTest extends TestCase {
                 result.add(token.getType());
                 result.add(token.getWords());
             }
-            assertEquals("[BACKSLASH, (, INCSELF, ++, VAR, i, RPAREN, ), PLUS, +, BACKSLASH, (, INCSELF, ++, VAR, i, RPAREN, )]" //
+            assertEquals("[LPAREN, (, INCSELF, ++, VAR, i, RPAREN, ), PLUS, +, LPAREN, (, INCSELF, ++, VAR, i, RPAREN, )]" //
                     , result.toString());
             result.clear();
             /**
@@ -294,7 +294,7 @@ public class LexerTest extends TestCase {
                 result.add(token.getType());
                 result.add(token.getWords());
             }
-            assertEquals("[FUNCTION, func, BACKSLASH, (, VAR, x, COMMA, ,, VAR, y, RPAREN, )]" //
+            assertEquals("[FUNCTION, func, LPAREN, (, VAR, x, COMMA, ,, VAR, y, RPAREN, )]" //
                     , result.toString());
             result.clear();
             /**
@@ -307,7 +307,6 @@ public class LexerTest extends TestCase {
                 result.add(token.getType());
                 result.add(token.getWords());
             }
-
             assertEquals("[VAR, name, VBAR, |, FUNCTION, trim]" //
                     , result.toString());
             result.clear();

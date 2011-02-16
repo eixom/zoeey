@@ -10,7 +10,7 @@ package org.zoeey.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.zoeey.common.ZObject;
@@ -103,7 +103,7 @@ public class UrlBuilder {
      * @return
      */
     public static String build(Collection<Entry<String, String>> entrySet, String[] excepts, String charset) {
-        Collection<Entry<String, String>> _collection = new HashSet<Entry<String, String>>(entrySet.size());
+        List<Entry<String, String>> _collection = new ArrayList<Entry<String, String>>(entrySet.size());
         for (Entry<String, String> entry : entrySet) {
             if (!ArrayHelper.inArray(excepts, entry.getKey())) {
                 _collection.add(entry);

@@ -111,14 +111,14 @@ public class SnoopyTest extends TestCase {
     @Test
     public void testGetContent() throws Exception {
         System.out.println("getContent");
-        URL url = new URL("http://example.com");
+        URL url = new URL("http://code.google.com/p/zoeey/");
         Snoopy snoopy = new Snoopy(url);
         String content = snoopy.doGet();
         if (content == null || content.length() == 0) {
-            fail("example.com 内容获取失败！");
+            fail("code.google.com 内容获取失败！");
         }
-        if (content.indexOf("example.org") == -1) {
-            fail("example.com 获取失败！");
+        if (content.indexOf("/p/zoeey/") == -1) {
+            fail("code.google.com 获取失败！");
         }
     }
 }

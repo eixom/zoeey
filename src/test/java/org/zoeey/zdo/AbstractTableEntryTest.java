@@ -7,9 +7,6 @@
  */
 package org.zoeey.zdo;
 
-import org.zoeey.zdo.AbstractTableEntry;
-import org.zoeey.zdo.AbstractTableEntryAble;
-import org.zoeey.zdo.FieldItem;
 import junit.framework.TestCase;
 import org.zoeey.dataBean.SampleLeaderBeanAble;
 import org.zoeey.dataBean.SamplePersonBean;
@@ -66,21 +63,18 @@ public class AbstractTableEntryTest extends TestCase {
 //        if (true) {
 //            return;
 //        }
-        String expResult = "leader : 3 - true - leader|age : 3 - 0 - age|name : 2 - MoXie - name|id : 3 - 0 - id|age : 3 - 0 - age|name : 2 - MoXie - name|id : 3 - 0 - id|";
-        StringBuffer result = new StringBuffer();
+        String expResult = "leader : 3 - true - leader|name : 2 - MoXie - name|id : 3 - 0 - id|age : 3 - 0 - age|name : 2 - MoXie - name|id : 3 - 0 - id|age : 3 - 0 - age|";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < fields.length; i++) {
             fieldEntry = fields[i];
-//            if (fieldEntry == null) {
-//                System.out.println(i);
-//                continue;
-//            }
             result.append(fieldEntry.getName());
             result.append(" : ");
             result.append(fieldEntry.getType());
             result.append(" - ");
             result.append(fieldEntry.getValue());
             result.append(" - ");
-            result.append(fieldEntry.getArgName() + "|");
+            result.append(fieldEntry.getArgName());
+            result.append("|");
         }
         assertEquals(expResult, result.toString());
     }

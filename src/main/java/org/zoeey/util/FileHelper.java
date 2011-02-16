@@ -369,9 +369,9 @@ public class FileHelper {
                     if (_file.isDirectory() && recusive) {
                         stack.push(_file);
                     } else if (_file.isFile()) {
-                        if (filter != null && filter.accept(_file)) {
+                        if (filter == null) {
                             fileList.add(_file);
-                        } else {
+                        } else if (filter != null && filter.accept(_file)) {
                             fileList.add(_file);
                         }
                     }

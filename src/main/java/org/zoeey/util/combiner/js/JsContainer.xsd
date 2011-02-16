@@ -7,6 +7,7 @@
          3）safeRoot 调用时如使用@开头则在safeRoot所规定的目录或文件，该路径必须使用安全目录做起始
          4）forceFile 强制加载文件，其处于加载队列最前方。
       2、single 用于标识一个或多个单页别称(name属性)，可使用fileRoot属性。
+         注意：当有多个single元素时，获取single list的排序可能不同于预期。
       3、group 将文件分组调用（别称为(name属性)），可使用fileRoot属性。
       4、file 文件或目录名（作为目录名仅在safeRoot标签中出现），可使用fileRoot属性。
          1） name 只可由字母数字和下划线组成。

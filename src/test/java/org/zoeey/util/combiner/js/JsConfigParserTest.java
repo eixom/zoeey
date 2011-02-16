@@ -79,95 +79,92 @@ public class JsConfigParserTest {
          * 根路径
          */
         assertEquals(context.getFileRoot(), "{classesDir}/jsLoader/script");
-        StringBuffer strBuffer = new StringBuffer();
+        StringBuilder strBuilder = new StringBuilder();
         for (JsFile js : context.getSafeRootList()) {
-            strBuffer.append(js.getFilePath());
-            strBuffer.append(',');
+            strBuilder.append(js.getFilePath());
+            strBuilder.append(',');
         }
 
-        assertEquals(strBuffer.toString(), "/webRoot/another_safe_jses"
+        assertEquals(strBuilder.toString(), "/webRoot/another_safe_jses"
                 + ",/webRoot/another_safe_jses2,");
         /**
          * 强制加载的文件
          */
-        strBuffer = new StringBuffer();
+        strBuilder = new StringBuilder();
         for (JsFile js : context.getForceFileList()) {
-            strBuffer.append(js.getPath());
-            strBuffer.append(',');
+            strBuilder.append(js.getPath());
+            strBuilder.append(',');
         }
 
-        assertEquals(strBuffer.toString(), "/force.js,/force_2.js,/force_3.js,");
+        assertEquals(strBuilder.toString(), "/force.js,/force_2.js,/force_3.js,");
         /**
          * 跳转的路径
          */
         if (false) {
-            strBuffer = new StringBuffer();
+            strBuilder = new StringBuilder();
             for (JsFile js : context.getRedirectList().values()) {
-                strBuffer.append(js.getName());
-                strBuffer.append(js.getFilePath());
-                strBuffer.append(',');
+                strBuilder.append(js.getName());
+                strBuilder.append(js.getFilePath());
+                strBuilder.append(',');
             }
-            assertEquals(strBuffer.toString(), "cross_yh_weather"
+            assertEquals(strBuilder.toString(), "cross_yh_weather"
                     + "http://someapi.com/weather.jsp,my_weatherd:/webRoot/scripts/weather.jsp,");
         }
         /**
          * 单独的文件
          */
-        strBuffer = new StringBuffer();
+        strBuilder = new StringBuilder();
         for (JsFile js : context.getSingleFileMap().values()) {
-            strBuffer.append(js.getName());
-            strBuffer.append(js.getPath());
-            strBuffer.append(',');
+            strBuilder.append(js.getName());
+            strBuilder.append(js.getPath());
+            strBuilder.append(',');
         }
-
-        assertEquals(strBuffer.toString(), "article.edit/edit.js"
-                + ",single_2/article/single_2.js"
-                + ",single_1/single_1.js,article.list/list.js,");
+        assertEquals(strBuilder.toString(), "article.edit/edit.js"
+                + ",article.list/list.js"
+                + ",single_2/article/single_2.js,single_1/single_1.js,");
         /**
          * 组文件
          */
-        strBuffer = new StringBuffer();
+        strBuilder = new StringBuilder();
         Iterator<Entry<String, List<JsFile>>> iterator = context.getGroupFileMap().entrySet().iterator();
         Entry<String, List<JsFile>> entry;
         List<JsFile> jsList;
-        strBuffer.append('[');
+        strBuilder.append('[');
         while (iterator.hasNext()) {
             entry = iterator.next();
-            strBuffer.append('{');
-            strBuffer.append(entry.getKey());
-            strBuffer.append(':');
+            strBuilder.append('{');
+            strBuilder.append(entry.getKey());
+            strBuilder.append(':');
             jsList = entry.getValue();
             for (JsFile js : jsList) {
-                strBuffer.append('{');
-                strBuffer.append(js.getName());
-                strBuffer.append(':');
-                strBuffer.append(js.getPath());
-                strBuffer.append("},");
+                strBuilder.append('{');
+                strBuilder.append(js.getName());
+                strBuilder.append(':');
+                strBuilder.append(js.getPath());
+                strBuilder.append("},");
             }
-            strBuffer.append("},");
+            strBuilder.append("},");
         }
-        strBuffer.append(']');
-      
-        assertEquals(strBuffer.toString(), "[{article.ajax:"
+        strBuilder.append(']');
+
+        assertEquals(strBuilder.toString(), "[{article.ajax:"
                 + "{group_file_a:/json.list.js},{null:/json.update.js},},]");
         /**
          * 所有命名文件
          */
-        strBuffer = new StringBuffer();
+        strBuilder = new StringBuilder();
         Iterator<Entry<String, JsFile>> iteratorNamed = context.getNamedFileMap().entrySet().iterator();
         Entry<String, JsFile> entryNamed;
         while (iteratorNamed.hasNext()) {
             entryNamed = iteratorNamed.next();
-            strBuffer.append(entryNamed.getKey());
-            strBuffer.append(':');
-            strBuffer.append(entryNamed.getValue().getPath());
-            strBuffer.append(',');
-        }        
-        assertEquals(strBuffer.toString(), "article.edit:/edit.js"
-                + ",single_2:/article/single_2.js"
-                + ",force_2:/force_2.js"
-                + ",article.list:/list.js"
-                + ",single_1:/single_1.js"
+            strBuilder.append(entryNamed.getKey());
+            strBuilder.append(':');
+            strBuilder.append(entryNamed.getValue().getPath());
+            strBuilder.append(',');
+        }
+        assertEquals(strBuilder.toString(), "force_2:/force_2.js"
+                + ",single_1:/single_1.js,single_2:/article/single_2.js"
+                + ",article.list:/list.js,article.edit:/edit.js"
                 + ",group_file_a:/json.list.js,");
     }
 }

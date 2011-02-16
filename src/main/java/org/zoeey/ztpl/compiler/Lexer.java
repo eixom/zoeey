@@ -766,7 +766,6 @@ public class Lexer {
                 index--;
             }
             break;
-
         }
         if (i == 1) {
             tokenStack.add(new Token(TokenType.BAND, "&", 8));
@@ -797,9 +796,9 @@ public class Lexer {
 
         }
         if (i == 1) {
-            tokenStack.add(new Token(TokenType.BAND, "|", 10));
+            tokenStack.add(new Token(TokenType.VBAR, "|", 10));
         } else if (i == 2) {
-            tokenStack.add(new Token(TokenType.AND, "||", 12));
+            tokenStack.add(new Token(TokenType.OR, "||", 12));
         } else {
             overlooker.disPass(index);
             overlooker.setMsg(ResourceExceptionMsg.ZTPL_AND_NUM);

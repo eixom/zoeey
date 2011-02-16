@@ -10,7 +10,7 @@ package org.zoeey.util.combiner.js;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
@@ -265,7 +265,10 @@ public class JsConfigParser {
      * @return
      */
     private Map<String, List<JsFile>> parseGroupsChilds(NodeList groupsNodeList) {
-        Map<String, List<JsFile>> groupFileMap = new HashMap<String, List<JsFile>>();
+        /**
+         * bugfix:group中的文件有序。
+         */
+        Map<String, List<JsFile>> groupFileMap = new LinkedHashMap<String, List<JsFile>>();
         List<JsFile> jsFileList;
         do {
             /**

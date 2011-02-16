@@ -7,10 +7,6 @@
  */
 package org.zoeey.util;
 
-import org.zoeey.util.StringHelper;
-import org.zoeey.util.JsonHelper;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -87,6 +83,10 @@ public class StringHelperTest {
         expResult = "\t中文";
         result = StringHelper.rtrim(str);
         assertEquals(expResult, result);
+        //
+        str = "//123";
+        expResult = "123";
+        result = StringHelper.ltrim(str, new char[]{'/'}); 
         //
         str = "//123//";
         expResult = "123";

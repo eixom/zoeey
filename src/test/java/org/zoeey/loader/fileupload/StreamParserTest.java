@@ -7,10 +7,6 @@
  */
 package org.zoeey.loader.fileupload;
 
-import org.zoeey.loader.fileupload.UploadConfig;
-import org.zoeey.loader.fileupload.StreamParser;
-import org.zoeey.loader.fileupload.FileItem;
-import org.zoeey.loader.fileupload.FileError;
 import com.meterware.httpunit.HttpUnitOptions;
 import com.meterware.httpunit.PostMethodWebRequest;
 import com.meterware.servletunit.InvocationContext;
@@ -109,7 +105,7 @@ public class StreamParserTest extends TestCase {
         config.setTempFileDir(tempDir);
         StreamParser sp = new StreamParser(boundary, config);
         sp.parse(inStream);
-        assertEquals("{name5=[中文字符串], name2=[name2_value], name6=[路人甲], name3=[name3_value], name1=[name1_value], MAX_FILE_SIZE=[30000]}",//
+        assertEquals("{name5=[中文字符串], name6=[路人甲], name3=[name3_value], name1=[name1_value], name2=[name2_value], MAX_FILE_SIZE=[30000]}",//
                 sp.getParamMap().toString());
         for (List<FileItem> fileItemList : sp.getFileMap().values()) {
             for (FileItem fileItem : fileItemList) {

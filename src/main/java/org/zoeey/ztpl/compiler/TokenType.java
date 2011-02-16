@@ -213,7 +213,11 @@ public enum TokenType {
      */
     SILENCE,
     /**
-     * 修饰，按位或，逻辑或（竖线） vertical bar "{@code |}"
+     * 逻辑或（竖线） vertical bar "{@code ||}"
+     */
+    OR,
+    /**
+     * 修饰，按位或 vertical bar "{@code |}"
      */
     VBAR,
     /**

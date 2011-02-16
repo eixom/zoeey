@@ -7,10 +7,10 @@
  */
 package org.zoeey.loader;
 
-import org.zoeey.loader.FieldMap;
-import org.zoeey.loader.FieldMapper;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import static org.junit.Assert.*;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -105,8 +105,8 @@ public class FieldMapperTest extends TestCase {
         FieldMapper.fieldToMap(map, fieldName + "[key_3_1][]", 1);
         FieldMapper.fieldToMap(map, fieldName + "[key_3_1][]", 2);
         FieldMapper.fieldToMap(map, fieldName + "[key_3_1][]", 3);
-        assertEquals(map.getMap("name").getMap("key_1").getMap("key_2").getList("key_3_1").toString(),//
-                "[3, 2, value, 1]");
+        
+        assertArrayEquals(map.getMap("name").getMap("key_1").getMap("key_2").getList("key_3_1").toArray(), new Object[]{3, 2, 1, "value"});
 //        tm.stop();
 //        System.out.println(tm.spend());
         // regexp

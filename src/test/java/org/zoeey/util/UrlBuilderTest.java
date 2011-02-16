@@ -7,7 +7,7 @@
  */
 package org.zoeey.util;
 
-import org.zoeey.util.UrlBuilder;
+import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,12 +67,12 @@ public class UrlBuilderTest {
     @Test
     public void testBuild_Map() {
         System.out.println("build");
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("", "length0");
         params.put("null", null);
         params.put("title", "_title");
         params.put("name", "MoXie");
-        String expResult = "&null=&title=_title&name=MoXie&=length0";
+        String expResult = "&=length0&null=&title=_title&name=MoXie";
         String result = UrlBuilder.build(params);
         assertEquals(expResult, result);
 
@@ -84,7 +84,7 @@ public class UrlBuilderTest {
     @Test
     public void testBuild_Map_StringArr() {
         System.out.println("build");
-        Map params = new HashMap();
+        Map params = new LinkedHashMap();
         params.put("", "length0");
         params.put("null", null);
         params.put("title", "_title");

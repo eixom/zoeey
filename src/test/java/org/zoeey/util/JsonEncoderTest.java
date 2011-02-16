@@ -84,13 +84,13 @@ public class JsonEncoderTest {
         set.add("MoXie");
         set.add("special:\"\\\\/\\b\\f\\n\\r\\t");
         result = JsonHelper.encode(set);
-        assertEquals(result, "[\"special:\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\",\"MoXie\"]");
+        assertEquals(result, "[\"MoXie\",\"special:\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\"]");
         // map
         Map<Object, Object> map = new HashMap<Object, Object>();
         map.put("name", "MoXie");
         map.put("special", "\"\\\\/\\b\\f\\n\\r\\t");
         result = JsonHelper.encode(map);
-        assertEquals(result, "{\"special\":\"\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\",\"name\":\"MoXie\"}");
+        assertEquals(result, "{\"name\":\"MoXie\",\"special\":\"\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\"}");
         // mixed
         list.add(strs);
         list.add(set);
@@ -98,8 +98,8 @@ public class JsonEncoderTest {
         result = JsonHelper.encode(list);
         assertEquals(result, "[\"MoXie\",\"special:\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\","
                 + "[\"MoXie\",\"special:\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\"],"
-                + "[\"special:\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\",\"MoXie\"],"
-                + "{\"special\":\"\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\",\"name\":\"MoXie\"}]");
+                + "[\"MoXie\",\"special:\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\"],"
+                + "{\"name\":\"MoXie\",\"special\":\"\\\"\\\\\\\\\\/\\\\b\\\\f\\\\n\\\\r\\\\t\"}]");
         result = JsonHelper.encode("中文");
         assertEquals(result, "\"\\u4e2d\\u6587\"");
 
@@ -157,8 +157,8 @@ public class JsonEncoderTest {
             fail("json encode failed.");
         }
         HanMeimei hanMM = new BeanHelperTest.HanMeimei("HanMeimei", 20, true, "dress");
-        assertEquals(new JsonEncoder().getJson(hanMM), "{\"age\":20"
-                + ",\"isActive\":true,\"dress\":\"dress\",\"name\":\"HanMeimei\"}");
+        assertEquals(new JsonEncoder().getJson(hanMM), "{\"isActive\":true"
+                + ",\"dress\":\"dress\",\"age\":20,\"name\":\"HanMeimei\"}");
 
         assertEquals(new JsonEncoder().getJson(Planet.EARTH), "\"EARTH\"");
 

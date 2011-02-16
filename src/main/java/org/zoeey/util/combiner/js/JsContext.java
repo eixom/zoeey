@@ -9,6 +9,7 @@ package org.zoeey.util.combiner.js;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.zoeey.constant.EnvConstants;
@@ -53,12 +54,15 @@ public class JsContext {
      *
      */
     public JsContext() {
-        groupFileMap = new HashMap<String, List<JsFile>>();
-        singleFileMap = new HashMap<String, JsFile>();
+        /**
+         * bugfixed:所有节点填充是有序的。
+         */
+        groupFileMap = new LinkedHashMap<String, List<JsFile>>();
+        singleFileMap = new LinkedHashMap<String, JsFile>();
         safeRootList = new ArrayList<JsFile>();
         forceFileList = new ArrayList<JsFile>();
-        redirectMap = new HashMap<String, JsFile>();
-        namedFileMap = new HashMap<String, JsFile>();
+        redirectMap = new LinkedHashMap<String, JsFile>();
+        namedFileMap = new LinkedHashMap<String, JsFile>();
     }
 
     /**

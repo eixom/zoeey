@@ -43,7 +43,7 @@ public class Supervisor {
      */
     public Supervisor(String prefix) {
         statusList = new ArrayList<Status>();
-        setPrefix(prefix);
+        this.prefix = prefix;
     }
 
     /**

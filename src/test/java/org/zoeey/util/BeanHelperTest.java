@@ -7,8 +7,6 @@
  */
 package org.zoeey.util;
 
-import org.zoeey.util.BeanHelper;
-import org.zoeey.util.JsonHelper;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.Assert;
@@ -17,6 +15,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  *
@@ -187,18 +187,21 @@ public class BeanHelperTest {
         System.out.println("toMap");
         HanMeimei obj = new HanMeimei("Han Meimei", 20, true, "dress");
         Map<String, Object> expResult = new HashMap<String, Object>();
+        expResult.put("isActive", true);
+        expResult.put("dress", "dress");
+        expResult.put("name", "Han Meimei");
         expResult.put("age", 20);
         expResult.put("class", "org.zoeey.util.BeanHelperTest$HanMeimei");
-        expResult.put("isActive", true);
-        expResult.put("dress", "dress");
-        expResult.put("name", "Han Meimei");
+
+
         Map<String, Object> result = BeanHelper.toMap(obj);
-        Assert.assertEquals(JsonHelper.encode(expResult), JsonHelper.encode(result));
+
+        assertEquals(JsonHelper.encode(expResult), JsonHelper.encode(result));
         expResult = new HashMap<String, Object>();
-        expResult.put("age", 20);
         expResult.put("isActive", true);
         expResult.put("dress", "dress");
         expResult.put("name", "Han Meimei");
+        expResult.put("age", 20);
         result = BeanHelper.toMapIgnoreClass(obj);
         Assert.assertEquals(JsonHelper.encode(expResult), JsonHelper.encode(result));
     }
