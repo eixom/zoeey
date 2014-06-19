@@ -13,3 +13,8 @@ Copyright 2008-2014 moxie
 Code license: GNU Lesser General Public License Version 3
 
 http://www.gnu.org/licenses/lgpl-3.0.txt
+
+
+
+## 以往版本
+[http://code.google.com/p/zoeey/](http://code.google.com/p/zoeey/)
